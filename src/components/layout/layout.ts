@@ -5,10 +5,11 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SideBar } from '../sideBar/sideBar';
+import { Header } from "../header/header";
 
 @Component({
   selector: 'app-layout',
-  imports: [SideBar, RouterOutlet],
+  imports: [SideBar, RouterOutlet, Header],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './layout.html'
 })

@@ -1,14 +1,17 @@
-<div class="flex h-screen w-full overflow-hidden">
-  <!-- Sidebar -->
-  <app-side-bar
-    [isCollapsed]="isCollapsed()"
-    (toggle)="toggleSidebar()"/>
-
-  <!-- Main Content -->
-  <main class="ml-5"
-        class="flex-1 overflow-auto transition-all duration-300">
-    <div class="p-6">
-      <router-outlet/>
+<div class="drawer lg:drawer-open">
+  <input id="app-drawer" type="checkbox" class="drawer-toggle" />
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="drawer-content flex flex-col">
+    <app-header />
+    <!-- PAGE -->
+    <div class="p-6 flex-1 overflow-auto">
+      <router-outlet />
     </div>
-  </main>
+  </div>
+  <!-- SIDE BAR -->
+  <div class="drawer-side border-r border-slate-200 dark:border-stone-800 ">
+    <label for="app-drawer" class="drawer-overlay"></label>
+    <app-side-bar class="h-full" [isCollapsed]="isCollapsed()" (toggle)="toggleSidebar()">
+    </app-side-bar>
+  </div>
 </div>

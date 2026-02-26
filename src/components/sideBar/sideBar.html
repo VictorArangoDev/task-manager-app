@@ -1,7 +1,4 @@
 
-
-
-
 <aside
   class="relative bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex flex-col h-full "
   [class.w-64]="!isCollapsed()"
@@ -10,9 +7,9 @@
 
   <!-- Toggle Button -->
 <button (click)="toggleSidebar()"
-        class="absolute -right-3 top-10 w-6 h-6 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md flex items-center justify-center hover:scale-110 transition-all">
+        class="absolute -right-0 top-20 w-6 h-6 rounded-full 0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md flex items-center justify-center hover:scale-110 transition-all">
 
-        <span class="material-symbols-outlined text-[16px]  dark:text-white ">
+        <span class="text-[16px]  dark:text-white  ">
           @if(isCollapsed()){
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <g fill="none" fill-rule="evenodd">
@@ -45,8 +42,8 @@
     </div>
 
     @if (!isCollapsed()) {
-     <h1 class="text-slate-900 text-black dark:text-white font-bold text-lg leading-tight">Project Aurora</h1>
-  <p class="text-xs text-slate-500 dark:text-slate-400">Management Suite</p>
+     <h1 class="text-slate-900 dark:text-white font-bold text-lg leading-tight">Project Aurora</h1>
+
     }
 
   </div>
@@ -54,7 +51,7 @@
   <!-- Navigation -->
      <nav class="flex-1 px-3 space-y-2 mt-4 overflow-y-auto">
 
-        <a routerLink="list" routerLinkActive="bg-blue-500 text-white "
+        <a routerLink="dashboard" routerLinkActive="bg-blue-500 text-white "
           class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-500  dark:hover:bg-slate-800 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="currentColor" fill-rule="evenodd"
@@ -66,8 +63,16 @@
           <span class="whitespace-nowrap">Dashboard</span>
           }
         </a>
+        <a routerLink="tasks" routerLinkActive="bg-blue-500 text-white "
+          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-500  dark:hover:bg-slate-800 transition-all">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M14.496 2h-5a1.5 1.5 0 0 0 0 3h5a1.5 1.5 0 0 0 0-3m-6.5 13h3.429m-3.429-4h8"/><path d="M15.996 3.5c1.554.047 2.48.22 3.121.862c.88.878.88 2.293.88 5.12V16c0 2.828 0 4.242-.88 5.121c-.878.879-2.293.879-5.12.879h-4c-2.83 0-4.244 0-5.122-.879S3.996 18.828 3.996 16V9.483c0-2.828 0-4.243.879-5.121c.641-.642 1.568-.815 3.121-.862"/></g></svg>
 
-        <a routerLink="/" routerLinkActive="bg-blue-500 text-white "
+          @if (!isCollapsed()) {
+          <span class="whitespace-nowrap">Tasks</span>
+          }
+        </a>
+
+        <a routerLink="projects" routerLinkActive="bg-blue-500 text-white "
           class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-500  dark:hover:bg-slate-800 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -77,16 +82,13 @@
           </svg>
 
           @if (!isCollapsed()) {
-          <span class="whitespace-nowrap">Analytics</span>
+          <span class="whitespace-nowrap">Projects</span>
           }
         </a>
 
-        <a routerLink="/" routerLinkActive="bg-blue-500 text-white "
+        <a routerLink="teams" routerLinkActive="bg-blue-500 text-white "
           class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-500  dark:hover:bg-slate-800 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="currentColor"
-              d="M9 4a4 4 0 1 0 0 8a4 4 0 1 0 0-8m1 9H8c-2.76 0-5 2.24-5 5v1c0 .55.45 1 1 1h10c.55 0 1-.45 1-1v-1c0-2.76-2.24-5-5-5m5-9c-.47 0-.9.09-1.31.22C14.51 5.24 15 6.55 15 8s-.49 2.75-1.31 3.78c.41.13.84.22 1.31.22c2.28 0 4-1.72 4-4s-1.72-4-4-4m1 9h-1.11A6.97 6.97 0 0 1 17 18v1c0 .35-.07.69-.18 1H20c.55 0 1-.45 1-1v-1c0-2.76-2.24-5-5-5" />
-          </svg>
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></g></svg>
 
           @if (!isCollapsed()) {
           <span class="whitespace-nowrap">Teams</span>
@@ -101,7 +103,15 @@
         </div>
         }
 
-        <a routerLink="/" routerLinkActive="bg-blue-500 text-white "
+
+
+      </nav>
+
+  <!-- User -->
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 flex">
+        <div class="flex items-center gap-3">
+
+  <a routerLink="settings" routerLinkActive="bg-blue-500 text-white "
           class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-500  dark:hover:bg-slate-800 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
             <circle cx="256" cy="256" r="48" fill="currentColor" />
@@ -113,15 +123,7 @@
           <span class="whitespace-nowrap">Settings</span>
           }
         </a>
-
-      </nav>
-
-  <!-- User -->
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800 flex">
-        <div class="flex items-center gap-3">
-
-
-          <div class="relative">
+          <!-- <div class="relative">
             <img class="w-10 h-10 rounded-full" src="https://i.pravatar.cc/100" alt="User avatar">
             <span
               class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
@@ -133,8 +135,11 @@
             <p class="text-sm font-semibold truncate dark:text-white">Alex Rivera</p>
             <p class="text-xs text-slate-500 truncate">Project Director</p>
           </div>
-          }
+          } -->
 
         </div>
       </div>
 </aside>
+
+
+
