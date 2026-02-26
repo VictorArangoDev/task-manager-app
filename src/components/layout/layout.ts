@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
-import { SideBar } from "../sideBar/sideBar";
-import { RouterOutlet } from "@angular/router";
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal
+} from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { SideBar } from '../sideBar/sideBar';
 
 @Component({
   selector: 'app-layout',
   imports: [SideBar, RouterOutlet],
-  templateUrl: './layout.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './layout.html'
 })
-export class Layout { }
+export class Layout {
+
+ isCollapsed = signal(false);
+
+  toggleSidebar() {
+    this.isCollapsed.update(v => !v);
+  }
+}
+
+

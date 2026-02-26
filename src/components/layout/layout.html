@@ -1,8 +1,14 @@
-<div class="flex min-h-screen">
+<div class="flex h-screen w-full overflow-hidden">
   <!-- Sidebar -->
-    <app-side-bar />
-  <!-- Contenido -->
-  <main class="flex-1 bg-gray-100">
-    <router-outlet />
+  <app-side-bar
+    [isCollapsed]="isCollapsed()"
+    (toggle)="toggleSidebar()"/>
+
+  <!-- Main Content -->
+  <main class="ml-5"
+        class="flex-1 overflow-auto transition-all duration-300">
+    <div class="p-6">
+      <router-outlet/>
+    </div>
   </main>
 </div>

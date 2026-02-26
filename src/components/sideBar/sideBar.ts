@@ -1,35 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, input, output,  } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-side-bar',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sideBar.html',
 
 })
 export class SideBar {
-
-
-  isCollapsed = false;
-  isMobile = false;
-
-  constructor() {
-    this.checkScreen();
-  }
-
-
-  checkScreen() {
-    this.isMobile = window.innerWidth < 768;
-
-    // En móvil inicia colapsado
-    if (this.isMobile) {
-      this.isCollapsed = true;
-    }
-  }
+  isCollapsed = input<boolean>(false);
+  toggle = output<void>();
 
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+    this.toggle.emit();
   }
-
 }
-
