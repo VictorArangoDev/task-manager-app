@@ -22,6 +22,7 @@ CREATE TABLE "user" (
     password VARCHAR(255) NOT NULL,
     id_role INTEGER NOT NULL,
     image VARCHAR(255),
+    session_token VARCHAR(255),
     estado BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),
