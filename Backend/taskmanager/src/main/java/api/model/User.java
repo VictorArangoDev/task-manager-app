@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,9 +38,9 @@ public class User {
     @Column(nullable = false, length = 500)
     private String password;
     
-    @ManyToOne
-    @JoinColumn(name = "id_role", nullable = false)
-    private Role role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_role")
+    private Role id_role;
     
     @Column(name = "image", length = 255)
     private String image;
@@ -109,11 +110,11 @@ public class User {
     }
 
     public Role getRole() {
-        return role;
+        return id_role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(Role id_role) {
+        this.id_role = id_role;
     }
 
     public String getImage() {
