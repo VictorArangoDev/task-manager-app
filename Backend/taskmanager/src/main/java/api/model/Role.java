@@ -13,24 +13,26 @@ public class Role {
 
     public Role() {
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
-    
+    private Long id;
+
     @Column(nullable = false, unique = true)
     private String name;
-    
+
     private String description;
-    
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
-    
+
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private Boolean state = true;
 
     public Role(String name) {
         this.name = name;
@@ -74,6 +76,14 @@ public class Role {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Boolean getActive() {
+        return state;
+    }
+
+    public void setActive(Boolean state) {
+        this.state = state;
     }
 
     @Override
