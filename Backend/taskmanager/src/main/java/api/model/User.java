@@ -49,7 +49,7 @@ public class User {
     private String sessionToken;
     
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private Boolean estado = true;
+    private Boolean state = true;
     
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -133,12 +133,12 @@ public class User {
         this.sessionToken = sessionToken;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public Boolean getState() {
+        return state;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public LocalDateTime getCreatedAt() {

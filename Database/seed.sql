@@ -2,15 +2,16 @@
 -- =========================================
 -- INSERT TABLA ROLE
 -- =========================================
-INSERT INTO role (name, active, created_at, updated_at) VALUES
+INSERT INTO roles (name, state, created_at, updated_at) VALUES
 ('ADMIN', true, now(), now()),
 ('SCRUM', true, now(), now()),
 ('MEMBER', true, now(), now());
 
 -- =========================================
 -- TABLA USER
--- =========================================INSERT INTO "user"
-(username, name, document, password, id_role, image, estado, created_at, updated_at)
+-- =========================================
+INSERT INTO "users"
+(username, name, document, password, id_role, image, state, created_at, updated_at)
 VALUES
 
 -- ADMIN

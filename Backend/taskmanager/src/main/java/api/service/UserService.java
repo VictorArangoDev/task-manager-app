@@ -2,6 +2,7 @@ package api.service;
 
 import org.springframework.stereotype.Service;
 
+import api.exception.UserNotFoundException;
 import api.dto.LoginRequest;
 import api.dto.LoginResponse;
 import api.exception.InvalidCredentialsException;
