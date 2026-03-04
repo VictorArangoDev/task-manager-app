@@ -78,11 +78,11 @@ public class Role {
         this.updatedAt = updatedAt;
     }
 
-    public Boolean getActive() {
+    public Boolean getState() {
         return state;
     }
 
-    public void setActive(Boolean state) {
+    public void setState(Boolean state) {
         this.state = state;
     }
 
