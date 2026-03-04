@@ -11,7 +11,7 @@ INSERT INTO roles (name, state, created_at, updated_at) VALUES
 -- TABLA USER
 -- =========================================
 INSERT INTO "users"
-(username, name, document, password, id_role, image, estado, created_at, updated_at)
+(username, name, document, password, id_role, image, state, created_at, updated_at)
 VALUES
 
 -- ADMIN
