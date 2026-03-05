@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-header-principal',
   imports: [RouterLink],
-  templateUrl: './signup.html',
+  templateUrl: './header-principal.html',
 })
-export class SignupPage { }
+export class HeaderPrincipal {
+
+
+ }
