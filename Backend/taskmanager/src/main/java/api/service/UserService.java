@@ -94,7 +94,9 @@ public class UserService {
             throw new InvalidCredentialsException("Credenciales inválidas");
         }
 
-        User user = userRepository.findByEmail(request.getEmail())
+        String email = request.getEmail();
+
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {

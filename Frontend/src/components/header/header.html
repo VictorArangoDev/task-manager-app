@@ -24,20 +24,28 @@
       <span
         class="absolute top-2 right-2.5 w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-stone-900"></span>
     </button>
-    <button
-      class="flex items-center gap-2 pl-2 pr-1 py-1 border border-slate-200 dark:border-stone-700 rounded-full hover:bg-slate-50 dark:hover:bg-stone-800 transition-colors">
-      <span class="text-sm font-medium text-slate-700 dark:text-slate-300 px-2">Alex Rivera</span>
-      <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
-        <img alt="Avatar" class="w-full h-full object-cover" data-alt="Portrait of a male team member avatar"
-          src="https://i.pravatar.cc/100" />
-      </div>
-    </button>
-    <button
+    @if (authService.authStatus() === 'authenticated') {
+      <button
+        class="flex items-center gap-2 pl-2 pr-1 py-1 border border-slate-200 dark:border-stone-700 rounded-full hover:bg-slate-50 dark:hover:bg-stone-800 transition-colors">
+        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 px-2"> {{authService.user()?.username}} </span>
+        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
+          <img alt="Avatar" class="w-full h-full object-cover" data-alt="Portrait of a male team member avatar"
+            src="https://i.pravatar.cc/100" />
+        </div>
+      </button>
+    }
+
+  <!--  -->
+    @if (authService.user()?.role === 'ADMIN') {
+
+       <button
       class="ml-2 py-2 px-4 bg-primary text-white text-sm font-bold rounded-xl flex items-center gap-2 hover:bg-primary/90 transition-all"><span
         class="material-symbols-outlined text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
           viewBox="0 0 24 24">
           <path fill="currentColor"
             d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
         </svg></span><span class="hidden sm:inline">Create New Project</span></button>
+    }
+
   </div>
 </header>
