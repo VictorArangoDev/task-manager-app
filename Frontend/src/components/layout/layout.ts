@@ -1,21 +1,25 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  signal
+  signal,
+  inject
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SideBar } from '../sideBar/sideBar';
+import { AuthService } from '../../auth/services/auth.service';
+import { SideBar } from "../sideBar/sideBar";
 import { Header } from "../header/header";
 
 @Component({
   selector: 'app-layout',
-  imports: [SideBar, RouterOutlet, Header],
+  imports: [RouterOutlet, SideBar, Header],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './layout.html'
 })
 export class Layout {
 
- isCollapsed = signal(false);
+  authService = inject(AuthService);
+
+    isCollapsed = signal(false);
 
   toggleSidebar() {
     this.isCollapsed.update(v => !v);

@@ -41,18 +41,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(crsf -> crsf.disable()).authorizeHttpRequests(auhtz -> auhtz
+ check-status
+                .csrf(crsf -> crsf.disable())
+                .authorizeHttpRequests(authz -> authz
+                    .requestMatchers("/api/auth/login").permitAll()
+                    //.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                    .anyRequest().authenticated()
+                )
 
-         .requestMatchers("/api/auth/**").permitAll()
-          .requestMatchers("/api/users/**").permitAll()
-            .requestMatchers("/api/priorities/**").permitAll()
-            .requestMatchers("/api/projects/**").permitAll()
-            .requestMatchers("/api/state-project-task/**").permitAll()
-            // .requestMatchers("/api/tasks/**").permitAll()
-            .requestMatchers("/api/roles/**").permitAll()
-        //  .anyRequest().authenticated()
-         .anyRequest().permitAll()
-        )
+                .csrf(crsf -> crsf.disable()).authorizeHttpRequests(auhtz -> auhtz
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
