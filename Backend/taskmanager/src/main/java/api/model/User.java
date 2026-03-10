@@ -34,6 +34,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @NotBlank(message = "El documento es obligatorio")
     @Column(nullable = false, unique = true)
     private String document;
 

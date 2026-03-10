@@ -47,6 +47,25 @@ public class ProjectService {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
     }
+
+    public Project updateProject(Long id, UpdateProjectRequest request) {
+
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+
+        StateProjectTask state = stateProjectTaskRepository
+                .findById(request.getStateProjectTaskId())
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        project.setName(request.getName());
+        project.setDescription(request.getDescription());
+        project.setStartDate(request.getStartDate());
+        project.setEndDate(request.getEndDate());
+        project.setDeadline(request.getDeadline());
+        project.setStateProjectTask(state);
+
+        return projectRepository.save(project);
+    }
     
 }
 
