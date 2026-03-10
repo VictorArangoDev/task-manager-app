@@ -39,38 +39,30 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
- check-status
-                .csrf(crsf -> crsf.disable())
-                .authorizeHttpRequests(authz -> authz
-                    .requestMatchers("/api/auth/login").permitAll()
-                    //.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-                    .anyRequest().authenticated()
-                )
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                .csrf(crsf -> crsf.disable()).authorizeHttpRequests(auhtz -> auhtz
+            .csrf(csrf -> csrf.disable())
 
-         .requestMatchers("/api/auth/**").permitAll()
-          .requestMatchers("/api/users/**").permitAll()
-            .requestMatchers("/api/priorities/**").permitAll()
-            .requestMatchers("/api/projects/**").permitAll()
-            .requestMatchers("/api/state-project-task/**").permitAll()
-            // .requestMatchers("/api/tasks/**").permitAll()
-            .requestMatchers("/api/roles/**").permitAll()
-        //  .anyRequest().authenticated()
-         .anyRequest().permitAll()
-        )
-        .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        )
-        .headers(headers -> headers
-            .frameOptions(frame -> frame.disable())
-        )
-        .formLogin(form -> form.disable())
-        .httpBasic(basic -> basic.disable());
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/api/auth/login").permitAll()
+                .anyRequest().authenticated()
+            )
+
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+
+            .headers(headers -> headers
+                .frameOptions(frame -> frame.disable())
+            )
+
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable());
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
