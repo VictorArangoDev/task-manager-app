@@ -39,27 +39,30 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
- check-status
-                .csrf(crsf -> crsf.disable())
-                .authorizeHttpRequests(authz -> authz
-                    .requestMatchers("/api/auth/login").permitAll()
-                    //.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-                    .anyRequest().authenticated()
-                )
 
-                .csrf(crsf -> crsf.disable()).authorizeHttpRequests(auhtz -> auhtz
-        .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        )
-        .headers(headers -> headers
-            .frameOptions(frame -> frame.disable())
-        )
-        .formLogin(form -> form.disable())
-        .httpBasic(basic -> basic.disable());
+        http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
+            .csrf(csrf -> csrf.disable())
+
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/api/auth/login").permitAll()
+                .anyRequest().authenticated()
+            )
+
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+
+            .headers(headers -> headers
+                .frameOptions(frame -> frame.disable())
+            )
+
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable());
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 

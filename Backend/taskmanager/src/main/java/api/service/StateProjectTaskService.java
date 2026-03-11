@@ -2,6 +2,7 @@ package api.service;
 
 import api.dto.CreateStateProjectTaskRequest;
 import api.dto.UpdateStateProjectTaskRequest;
+import api.exception.ResourceNotFoundException;
 import api.model.StateProjectTask;
 import api.repository.StateProjectTaskRepository;
 
@@ -33,14 +34,14 @@ public class StateProjectTaskService {
     // Obtener estado por ID
     public StateProjectTask getStateById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Estado no encontrado"));
     }
 
     // Editar estado
     public StateProjectTask updateState(Long id, UpdateStateProjectTaskRequest request) {
 
         StateProjectTask state = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Estado no encontrado"));
 
         state.setName(request.getName());
 
