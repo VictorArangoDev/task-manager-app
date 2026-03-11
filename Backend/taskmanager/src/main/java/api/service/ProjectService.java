@@ -1,7 +1,6 @@
 package api.service;
 
 import api.dto.*;
-import api.exception.ResourceNotFoundException;
 import api.model.Project;
 import api.model.Role;
 import api.model.StateProjectTask;
@@ -25,7 +24,7 @@ public class ProjectService {
 
         StateProjectTask state = stateProjectTaskRepository
                 .findById(request.getStateProjectTaskId())
-                .orElseThrow(() -> new ResourceNotFoundException("Estado de proyecto no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Estado de proyecto no encontrado"));
 
         Project project = new Project();
 
@@ -47,25 +46,6 @@ public class ProjectService {
 
         return projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
-    }
-
-    public Project updateProject(Long id, UpdateProjectRequest request) {
-
-        Project project = projectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
-
-        StateProjectTask state = stateProjectTaskRepository
-                .findById(request.getStateProjectTaskId())
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
-
-        project.setName(request.getName());
-        project.setDescription(request.getDescription());
-        project.setStartDate(request.getStartDate());
-        project.setEndDate(request.getEndDate());
-        project.setDeadline(request.getDeadline());
-        project.setStateProjectTask(state);
-
-        return projectRepository.save(project);
     }
     
 }

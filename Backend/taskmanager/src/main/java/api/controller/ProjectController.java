@@ -1,7 +1,6 @@
 package api.controller;
 
 import api.dto.CreateProjectRequest;
-import api.dto.UpdateProjectRequest;
 import api.model.Project;
 import api.service.ProjectService;
 
@@ -31,13 +30,5 @@ public class ProjectController {
     @GetMapping("/{id}")
     public Project getProjectById(@PathVariable Long id) {
         return projectService.getProjectById(id);
-    }
-
-    @PutMapping("/{id}")
-    public Project updateProject(
-            @PathVariable Long id,
-            @RequestBody UpdateProjectRequest request) {
-
-        return projectService.updateProject(id, request);
     }
 }
