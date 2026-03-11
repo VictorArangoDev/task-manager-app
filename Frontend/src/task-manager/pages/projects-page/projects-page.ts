@@ -1,9 +1,23 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ProjectsService } from '../services/projects.service';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { ProjectCard } from "./components/projectCard/projectCard/projectCard";
 
 @Component({
-  selector: 'app-projects-page',
-  imports: [],
+  selector: 'projects-page',
+  imports: [ProjectCard],
   templateUrl: './projects-page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectsPage { }
+export class ProjectsPage {
+
+  projectsService = inject(ProjectsService);
+
+
+  projectResource = rxResource({
+    params: () => ({}),
+    stream :({ params }) => {
+      return this.projectsService.getProjects() ?? [];
+    },
+  })
+
+ }
