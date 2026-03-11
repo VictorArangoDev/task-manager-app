@@ -1,17 +1,45 @@
 <main class="flex-1 flex flex-col overflow-hidden">
 
-  <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-8 bg-background-light dark:bg-background-dark">
+  <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-8 ">
     <!-- Favorites / Highlights -->
     <section>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 
-       @for (project of projectResource.value(); track project.id) {
-    <project-card [project]="project"></project-card>
-  }
+
+        @if (projectResource.isLoading()) {
+        <p>Cargando proyectos...</p>
+        }
+
+
+        @for (project of projectResource.value(); track project.id) {
+        <project-card [project]="project"></project-card>
+        }@empty {
+        <p>No hay proyectos...</p>
+        }
 
 
 
+        @if (authservice.user()?.role === 'ADMIN') {
+
+
+        <div (click)="openCreateProject()" (projectCreated)="projectResource.reload()"
+          class="bg-white/40 dark:bg-stone-900/40 rounded-xl border-2 border-dashed border-slate-200
+          dark:border-stone-800 flex flex-col items-center justify-center p-8 group hover:border-primary/50
+          transition-all cursor-pointer">
+          <div
+            class="w-12 h-12 rounded-full bg-slate-100 dark:bg-stone-800 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition-all mb-4">
+            <span class="material-symbols-outlined"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M11.883 3.007L12 3a1 1 0 0 1 .993.883L13 4v7h7a1 1 0 0 1 .993.883L21 12a1 1 0 0 1-.883.993L20 13h-7v7a1 1 0 0 1-.883.993L12 21a1 1 0 0 1-.993-.883L11 20v-7H4a1 1 0 0 1-.993-.883L3 12a1 1 0 0 1 .883-.993L4 11h7V4a1 1 0 0 1 .883-.993L12 3z" />
+              </svg></span>
+          </div>
+          <p class="font-bold text-slate-900 dark:text-white">Start New Project</p>
+          <p class="text-xs text-slate-500 text-center mt-2">Bring your next big idea to life with team collaboration.
+          </p>
+        </div>
+        }
       </div>
     </section>
   </div>
