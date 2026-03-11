@@ -1,4 +1,4 @@
-import { Component, inject  } from '@angular/core';
+import { Component, inject, input, output  } from '@angular/core';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthService } from '../../auth/services/auth.service';
 import { Layout } from '../layout/layout';
@@ -13,4 +13,5 @@ export class SideBar {
 
   authService = inject(AuthService);
   layoutService =inject(Layout)
+
 }
