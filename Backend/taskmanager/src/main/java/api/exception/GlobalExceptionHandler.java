@@ -3,7 +3,6 @@ package api.exception;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.management.relation.RoleNotFoundException;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -60,6 +59,7 @@ public class GlobalExceptionHandler {
         // Devuelve 404 Not Found con el mensaje descriptivo del recurso.
         @ExceptionHandler(ResourceNotFoundException.class)
         public ResponseEntity<ApiResponse> handleResourceNotFound(ResourceNotFoundException e) {
+                // logger.error("ResourceNotFound: " + e.getMessage());
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                 .body(new ApiResponse("error", 404, e.getMessage(), null));
         }
@@ -69,7 +69,7 @@ public class GlobalExceptionHandler {
         // Devuelve 500 Internal Server Error.
         @ExceptionHandler(Exception.class)
         public ResponseEntity<ApiResponse> handleGenericException(Exception e) {
-
+                logger.error("Error inesperado: ", e);
                 return ResponseEntity
                                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                                 .body(new ApiResponse(
@@ -118,6 +118,7 @@ public class GlobalExceptionHandler {
         // Devuelve 409 Conflict con el mensaje descriptivo del recurso.
         @ExceptionHandler(DuplicateResourceException.class)
         public ResponseEntity<ApiResponse> handleDuplicate(DuplicateResourceException e) {
+                //  logger.error("DuplicateResource: " + e.getMessage());
                 Object data = e.getErrors() != null ? e.getErrors() : null;
                 return ResponseEntity.status(HttpStatus.CONFLICT)
                                 .body(new ApiResponse("error", 409, "Ya existen registros con esos datos", data));
@@ -125,6 +126,7 @@ public class GlobalExceptionHandler {
 
         @ExceptionHandler(IllegalArgumentException.class)
         public ResponseEntity<ApiResponse> handleIllegalArgument(IllegalArgumentException e) {
+                //  logger.error("DuplicateResource: " + e.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                 .body(new ApiResponse("error", 400, e.getMessage(), null));
         }
