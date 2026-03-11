@@ -6,6 +6,9 @@ import { ProjectsPage } from "./pages/projects-page/projects-page";
 import { SettingsPage } from "./pages/settings-page/settings-page";
 import { TaskListPage } from "./pages/task-list--page/task-list--page";
 import { TeamsPage } from "./pages/teams-page/teams-page";
+import { AdminGuard } from "../auth/guards/admin.guard";
+import { UsersPage } from "./pages/users-page/users-page";
+import { RolesPage } from "./pages/roles-page/roles-page";
 
 export const tasksRoutes: Routes = [
   {
@@ -13,7 +16,16 @@ export const tasksRoutes: Routes = [
     component: Layout,
     children: [
       {
-        path: "dashboard", component: DashboardPage
+        path: "dashboard", component: DashboardPage,
+        canActivate: [AdminGuard]
+      },
+      {
+        path: "users", component: UsersPage,
+        canActivate: [AdminGuard]
+      },
+      {
+        path: "roles", component: RolesPage,
+        canActivate: [AdminGuard]
       },
       {
         path: "projects", component: ProjectsPage
@@ -28,6 +40,7 @@ export const tasksRoutes: Routes = [
         path: "settings", component: SettingsPage
       },
     ]
+
   }
 ]
 

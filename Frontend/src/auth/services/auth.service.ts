@@ -14,12 +14,12 @@ const baseUrl = environment.baseUrl;
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private _authStatus =signal<AuthStatus>('checking')
-  private _user = signal<User|null>(null);
-  private _token = signal<String|null>(localStorage.getItem('token'));
+  private readonly _authStatus =signal<AuthStatus>('checking')
+  private readonly _user = signal<User|null>(null);
+  private readonly _token = signal<string|null>(localStorage.getItem('token'));
 
 
-    private http = inject(HttpClient);
+    private readonly http = inject(HttpClient);
 
     checkStatusResource = rxResource({
        stream: () => this.checkStatus(),
@@ -79,13 +79,24 @@ export class AuthService {
 
     }
 
+    isAdmin():Observable<boolean>{
+      const role  = this._user()?.role;
+
+      if(role === 'ADMIN'){
+        return of(true);
+      }else{
+        return of(false);
+      }
+
+    }
+
 
     logout(){
       this._user.set(null);
       this._token.set(null);
       this._authStatus.set('not-authenticated');
-      //TODO: revertir
-      // localStorage.removeItem('token');
+
+       localStorage.removeItem('token');
     }
 
     private handleAuthSuccess({ data }: AuthResponse){
@@ -101,4 +112,12 @@ export class AuthService {
       this.logout();
       return of(false);
     }
+
+
+
+
+
+
+
+
 }
