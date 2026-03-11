@@ -1,6 +1,8 @@
 package api.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,7 +15,8 @@ public class Priority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El nombre de la prioridad es obligatorio")
+    @Column(nullable = false, unique = true)
     private String name;    
 
     @CreationTimestamp

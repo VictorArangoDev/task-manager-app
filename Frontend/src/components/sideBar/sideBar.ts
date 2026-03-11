@@ -1,6 +1,7 @@
-import { Component, inject, input, output,  } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Component, inject  } from '@angular/core';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthService } from '../../auth/services/auth.service';
+import { Layout } from '../layout/layout';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,12 +12,5 @@ import { AuthService } from '../../auth/services/auth.service';
 export class SideBar {
 
   authService = inject(AuthService);
-
-
-  isCollapsed = input<boolean>(false);
-  toggle = output<void>();
-
-  toggleSidebar() {
-    this.toggle.emit();
-  }
+  layoutService =inject(Layout)
 }

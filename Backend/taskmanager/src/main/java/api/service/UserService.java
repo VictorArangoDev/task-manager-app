@@ -6,13 +6,18 @@ import api.exception.UserNotFoundException;
 import api.dto.LoginRequest;
 import api.dto.LoginResponse;
 import api.dto.UserResponse;
+import api.exception.DuplicateResourceException;
 import api.exception.InvalidCredentialsException;
+import api.exception.ResourceNotFoundException;
 import api.model.Role;
 import api.model.User;
 import api.repository.RoleRepository;
 import api.repository.UserRepository;
 import api.utils.JwtUtil;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,11 +39,29 @@ public class UserService {
 
     public User crearUsuario(User user) {
         if (user.getRole() == null || user.getRole().getId() == null) {
-            throw new RuntimeException("El rol es obligatorio");
+            throw new IllegalArgumentException("El rol es obligatorio");
+        }
+
+        // Recolecta todos los errores de duplicados
+        Map<String, String> errors = new HashMap<>();
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            errors.put("email", "Este email ya está registrado");
+        }
+        if (userRepository.existsByUsername(user.getUsername())) {
+            errors.put("username", "Este username ya está en uso");
+        }
+        if (userRepository.existsByDocument(user.getDocument())) {
+            errors.put("document", "Este documento ya está registrado");
+        }
+
+        // Si hay errores los lanza todos juntos
+        if (!errors.isEmpty()) {
+            throw new DuplicateResourceException(errors);
         }
 
         Role role = roleRepository.findById(user.getRole().getId())
-                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado"));
 
         user.setRole(role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -84,8 +107,6 @@ public class UserService {
 
     public LoginResponse login(LoginRequest request) {
 
-    try {
-
         if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
             throw new InvalidCredentialsException("Credenciales inválidas");
         }
@@ -100,7 +121,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new InvalidCredentialsException("Credenciales inválidas");
+            throw new InvalidCredentialsException("La contraseña no coincide");
         }
 
         if (user.getRole() == null) {
@@ -120,13 +141,8 @@ public class UserService {
                 user.getImage(),
                 user.getState(),
                 user.getCreatedAt(),
-                user.getUpdatedAt()
-        );
+                user.getUpdatedAt());
 
         return new LoginResponse(userResponse, token);
-
-    } catch (Exception e) {
-        throw new RuntimeException("Error interno en el servidor");
     }
-}
 }

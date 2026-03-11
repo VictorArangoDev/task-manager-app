@@ -1,5 +1,7 @@
 package api.service;
 
+import api.exception.DuplicateResourceException;
+import api.exception.ResourceNotFoundException;
 import api.model.Priority;
 import api.repository.PriorityRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,13 @@ public class PriorityService {
     }
 
     public Priority createPriority(Priority priority) {
+
+        if (priorityRepository.existsByName(priority.getName())) {
+            throw new DuplicateResourceException("La prioridad '" + priority.getName() + "' ya existe");
+        }
         return priorityRepository.save(priority);
+        // Si el nombre está duplicado, la BD lanza DataIntegrityViolationException
+        // que ya tienes manejada en GlobalExceptionHandler
     }
 
     public List<Priority> findAll() {
@@ -34,7 +42,7 @@ public class PriorityService {
     public Priority updatePriority(Long id, Priority priorityDetails) {
 
         Priority priority = priorityRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Prioridad no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Prioridad no encontrada"));
 
         priority.setName(priorityDetails.getName());
 
