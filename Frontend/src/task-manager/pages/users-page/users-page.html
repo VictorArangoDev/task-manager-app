@@ -1,173 +1,148 @@
 <main class="flex-1 flex flex-col overflow-y-auto">
-<!-- Header -->
-<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-6">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div>
-<h2 class="text-2xl font-bold tracking-tight">User Management</h2>
-<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage your team members, their roles, and system access levels.</p>
-</div>
-<button class="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-primary/90 transition-all gap-2">
-<span class="material-symbols-outlined">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="currentColor" d="M14 4c-3.854 0-7 3.146-7 7c0 2.41 1.23 4.552 3.094 5.813C6.527 18.343 4 21.88 4 26h2c0-4.43 3.57-8 8-8c1.376 0 2.654.358 3.78.97A8 8 0 0 0 16 24c0 4.406 3.594 8 8 8s8-3.594 8-8s-3.594-8-8-8a7.98 7.98 0 0 0-4.688 1.53c-.442-.277-.92-.51-1.406-.718A7.02 7.02 0 0 0 21 11c0-3.854-3.146-7-7-7m0 2c2.773 0 5 2.227 5 5s-2.227 5-5 5s-5-2.227-5-5s2.227-5 5-5m10 12c3.326 0 6 2.674 6 6s-2.674 6-6 6s-6-2.674-6-6s2.674-6 6-6m-1 2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
-</span>
-                        Add User
-                    </button>
-</div>
-</header>
-<!-- Table Filters and Search -->
-<div class="px-8 pt-8">
-<div class="flex flex-wrap items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-<div class="flex-1 min-w-[300px]">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5l-1.5 1.5l-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14S14 12 14 9.5S12 5 9.5 5"/></svg>
-</span>
-<input class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm" placeholder="Search by name, email or role..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-3">
-<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
-<span class="material-symbols-outlined text-lg">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 19.88c.04.3-.06.62-.29.83a.996.996 0 0 1-1.41 0L9.29 16.7a.99.99 0 0 1-.29-.83v-5.12L4.21 4.62a1 1 0 0 1 .17-1.4c.19-.14.4-.22.62-.22h14c.22 0 .43.08.62.22a1 1 0 0 1 .17 1.4L15 10.75zM7.04 5L11 10.06v5.52l2 2v-7.53L16.96 5z"/></svg>
-</span>
-                            Filter by Role
-                        </div>
-<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
-<span class="material-symbols-outlined text-lg">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm12-4v4M8 3v4m-4 4h16m-9 4h1m0 0v3"/></svg>
-</span>
-                            All Time
-                        </div>
-</div>
-</div>
-</div>
-<!-- Data Table Container -->
-<div class="px-8 py-6">
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Name</th>
-<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Email Address</th>
-<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Role</th>
-<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
-<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Last Login</th>
-<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">AR</div>
-<div class="font-medium">Alex Rivera</div>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">alex.r@aurora.com</td>
-<td class="px-6 py-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">Admin</span>
-</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-<span class="text-sm font-medium">Active</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-500">2 mins ago</td>
-<td class="px-6 py-4 text-right">
-<!-- Options  -->
+  <!-- Header -->
+  <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight">User Management</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage your team members, their roles, and system
+          access levels.</p>
+      </div>
+      <button
+        class="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-primary/90 transition-all gap-2">
+        <span class="material-symbols-outlined">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+            <path fill="currentColor"
+              d="M14 4c-3.854 0-7 3.146-7 7c0 2.41 1.23 4.552 3.094 5.813C6.527 18.343 4 21.88 4 26h2c0-4.43 3.57-8 8-8c1.376 0 2.654.358 3.78.97A8 8 0 0 0 16 24c0 4.406 3.594 8 8 8s8-3.594 8-8s-3.594-8-8-8a7.98 7.98 0 0 0-4.688 1.53c-.442-.277-.92-.51-1.406-.718A7.02 7.02 0 0 0 21 11c0-3.854-3.146-7-7-7m0 2c2.773 0 5 2.227 5 5s-2.227 5-5 5s-5-2.227-5-5s2.227-5 5-5m10 12c3.326 0 6 2.674 6 6s-2.674 6-6 6s-6-2.674-6-6s2.674-6 6-6m-1 2v3h-3v2h3v3h2v-3h3v-2h-3v-3z" />
+          </svg>
+        </span>
+        Add User
+      </button>
+    </div>
+  </header>
+  <!-- Table Filters and Search -->
+  <div class="px-8 pt-8">
+    <div
+      class="flex flex-wrap items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+      <div class="flex-1 min-w-[300px]">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5l-1.5 1.5l-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14S14 12 14 9.5S12 5 9.5 5" />
+            </svg>
+          </span>
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm"
+            placeholder="Search by name, email or role..." type="text" />
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div
+          class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M15 19.88c.04.3-.06.62-.29.83a.996.996 0 0 1-1.41 0L9.29 16.7a.99.99 0 0 1-.29-.83v-5.12L4.21 4.62a1 1 0 0 1 .17-1.4c.19-.14.4-.22.62-.22h14c.22 0 .43.08.62.22a1 1 0 0 1 .17 1.4L15 10.75zM7.04 5L11 10.06v5.52l2 2v-7.53L16.96 5z" />
+            </svg>
+          </span>
+          Filter by Role
+        </div>
+        <div
+          class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm12-4v4M8 3v4m-4 4h16m-9 4h1m0 0v3" />
+            </svg>
+          </span>
+          All Time
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Estado de carga -->
+  @if (userResource.isLoading()) {
+  <div class="col-span-3 text-center py-12">
+    <p class="text-slate-500">Cargando usuarios...</p>
+  </div>
+  }
+  <!-- Data Table Container -->
+  <div class="px-8 py-6">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Name</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Email Address</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Role</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Document</th>
+              <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+            </tr>
+          </thead>
 
-  <options-component/>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+            @for (users of userResource.value(); track users.id) {
+            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
 
-</td>
-</tr>
-<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-sm">SC</div>
-<div class="font-medium">Sarah Chen</div>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">s.chen@aurora.com</td>
-<td class="px-6 py-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Member</span>
-</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-<span class="text-sm font-medium">Active</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-500">1 hour ago</td>
-<td class="px-6 py-4 text-right">
 
-<options-component/>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+                    {{users.name | iniciales }}</div>
+                  <div class="font-medium">{{users.name }}</div>
+                </div>
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{{users.email}}</td>
+              <td class="px-6 py-4">
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">{{users.role.name}}</span>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span class="text-sm font-medium">Active</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-500">{{users.document}}</td>
+              <td class="px-6 py-4 text-right">
+                <!-- Options  -->
 
-</td>
-</tr>
-<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-sm">JS</div>
-<div class="font-medium">Jordan Smyth</div>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">jordan.s@aurora.com</td>
-<td class="px-6 py-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Viewer</span>
-</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-slate-400"></span>
-<span class="text-sm font-medium text-slate-500">Inactive</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-500">3 days ago</td>
-<td class="px-6 py-4 text-right">
+                <options-component />
 
-  <options-component/>
+              </td>
+            </tr>
+            }@empty {
+        <!-- Si no hay usuarios -->
+        @if (!userResource.isLoading()) {
+        <div class="col-span-3 text-center py-12">
+          <p class="text-slate-500">No hay usuarios disponibles</p>
+        </div>
+        }
+        }
 
-</td>
-</tr>
-<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-sm">TR</div>
-<div class="font-medium">Taylor Reed</div>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">t.reed@aurora.com</td>
-<td class="px-6 py-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Member</span>
-</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-<span class="text-sm font-medium">Active</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-slate-500">Yesterday</td>
-<td class="px-6 py-4 text-right">
-
-  <options-component/>
-
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Pagination -->
-<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
-<div class="text-sm text-slate-500">Showing 1 to 4 of 24 users</div>
-<div class="flex items-center gap-2">
-<button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors disabled:opacity-50" disabled="">Previous</button>
-<button class="px-3 py-1 bg-primary text-white rounded text-sm">1</button>
-<button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors">2</button>
-<button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors">3</button>
-<button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors">Next</button>
-</div>
-</div>
-</div>
-</div>
+          </tbody>
+        </table>
+      </div>
+      <!-- Pagination -->
+      <div
+        class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+        <div class="text-sm text-slate-500">Showing 1 to {{userResource.value()?.length || 0 }} of {{userResource.value()?.length || 0 }} users</div>
+        <div class="flex items-center gap-2">
+          <button
+            class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors disabled:opacity-50"
+            disabled="">Previous</button>
+          <button class="px-3 py-1 bg-primary text-white rounded text-sm">1</button>
+          <button
+            class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors">2</button>
+          <button
+            class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors">3</button>
+          <button
+            class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-white dark:hover:bg-slate-900 transition-colors">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
