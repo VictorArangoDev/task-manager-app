@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import api.exception.UserNotFoundException;
 import api.dto.LoginRequest;
 import api.dto.LoginResponse;
+import api.dto.RegisterRequest;
 import api.dto.UserResponse;
 import api.exception.DuplicateResourceException;
 import api.exception.InvalidCredentialsException;
@@ -37,36 +38,41 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
-    public User crearUsuario(User user) {
-        if (user.getRole() == null || user.getRole().getId() == null) {
-            throw new IllegalArgumentException("El rol es obligatorio");
-        }
+    public User crearUsuario(RegisterRequest request) {
 
-        // Recolecta todos los errores de duplicados
-        Map<String, String> errors = new HashMap<>();
+    Map<String, String> errors = new HashMap<>();
 
-        if (userRepository.existsByEmail(user.getEmail())) {
-            errors.put("email", "Este email ya está registrado");
-        }
-        if (userRepository.existsByUsername(user.getUsername())) {
-            errors.put("username", "Este username ya está en uso");
-        }
-        if (userRepository.existsByDocument(user.getDocument())) {
-            errors.put("document", "Este documento ya está registrado");
-        }
-
-        // Si hay errores los lanza todos juntos
-        if (!errors.isEmpty()) {
-            throw new DuplicateResourceException(errors);
-        }
-
-        Role role = roleRepository.findById(user.getRole().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado"));
-
-        user.setRole(role);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    if (userRepository.existsByEmail(request.getEmail())) {
+        errors.put("email", "Este email ya está registrado");
     }
+
+    if (userRepository.existsByUsername(request.getUsername())) {
+        errors.put("username", "Este username ya está en uso");
+    }
+
+    if (userRepository.existsByDocument(request.getDocument())) {
+        errors.put("document", "Este documento ya está registrado");
+    }
+
+    if (!errors.isEmpty()) {
+        throw new DuplicateResourceException(errors);
+    }
+
+    // buscar rol USER automáticamente
+    Role role = roleRepository.findByName("MEMBER")
+            .orElseThrow(() -> new ResourceNotFoundException("Rol USER no encontrado"));
+
+    User user = new User();
+
+    user.setUsername(request.getUsername());
+    user.setPassword(passwordEncoder.encode(request.getPassword()));
+    user.setEmail(request.getEmail());
+    user.setName(request.getName());
+    user.setDocument(request.getDocument());
+    user.setRole(role);
+
+    return userRepository.save(user);
+}
 
     public List<User> finAll() {
         return userRepository.findAll();
@@ -145,4 +151,8 @@ public class UserService {
 
         return new LoginResponse(userResponse, token);
     }
+
+    public boolean existsByUsername(String username) {
+    return userRepository.existsByUsername(username);
+}
 }

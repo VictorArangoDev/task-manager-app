@@ -1,7 +1,5 @@
 package api.controller;
 
-
-
 import org.springframework.web.bind.annotation.*;
 
 import api.dto.ApiResponse;
@@ -23,13 +21,7 @@ public class UserController {
                 this.userService = userService;
         }
 
-        @PostMapping
-        public ResponseEntity<ApiResponse> createUser(@Valid @RequestBody User user) {
-                User savedUser = userService.crearUsuario(user);
-                return ResponseEntity.status(HttpStatus.CREATED).body(
-                                new ApiResponse("success", HttpStatus.CREATED.value(), "Usuario Creado correctamente",
-                                                savedUser));
-        }
+        
 
         @GetMapping
         public ResponseEntity<ApiResponse> findAll() {
@@ -78,4 +70,6 @@ public class UserController {
                                 .body(new ApiResponse("error", HttpStatus.NOT_FOUND.value(), "Usuario no encontrado",
                                                 null));
         }
+
+        
 }

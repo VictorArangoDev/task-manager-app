@@ -1,17 +1,19 @@
 package api.controller;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.dto.ApiResponse;
 import api.dto.LoginRequest;
 import api.dto.LoginResponse;
+import api.dto.RegisterRequest;
 import api.dto.UserResponse;
 import api.model.User;
 import api.repository.UserRepository;
 import api.service.UserService;
 import api.utils.JwtUtil;
+import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-
 
 
 
@@ -31,103 +32,126 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
 
-    public AuthController(UserService userService, JwtUtil jwtUtil, UserRepository userRepository){
+    public AuthController(UserService userService, JwtUtil jwtUtil, UserRepository userRepository) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login( @RequestBody LoginRequest request) {
-        LoginResponse loginResponse = userService.login(request);        
-        return ResponseEntity.ok(
-            new ApiResponse("Success", HttpStatus.OK.value(), "Logueado correctamente", loginResponse)
-        );
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse> register(@Valid @RequestBody RegisterRequest request) {
+
+        User savedUser = userService.crearUsuario(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                new ApiResponse(
+                        "success",
+                        HttpStatus.CREATED.value(),
+                        "Usuario registrado correctamente",
+                        savedUser));
     }
 
-       @GetMapping("/check-status")
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest request) {
+        LoginResponse loginResponse = userService.login(request);
+        return ResponseEntity.ok(
+                new ApiResponse("Success", HttpStatus.OK.value(), "Logueado correctamente", loginResponse));
+    }
+
+    @GetMapping("/check-status")
     public ResponseEntity<ApiResponse> checkStatus(
-        @RequestHeader(value = "Authorization", required = false) String authorizationHeader
-    ) {
+            @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token no proporcionado", null)
-            );
+                    new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token no proporcionado", null));
         }
 
         String token = authorizationHeader.substring(7);
 
         try {
             String username = jwtUtil.extractUsername(token);
-            
+
             // Obtener el usuario completo de la base de datos
             User user = userRepository.findByUsername(username).orElse(null);
-            
+
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                    new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Usuario no encontrado", null)
-                );
+                        new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Usuario no encontrado", null));
             }
 
             String roleName = user.getRole() != null ? user.getRole().getName() : null;
 
             UserResponse userResponse = new UserResponse(
-                user.getId(),
-                user.getUsername(),
-                user.getName(),
-                user.getDocument(),
-                user.getEmail(),
-                roleName,
-                user.getImage(),
-                user.getState(),
-                user.getCreatedAt(),
-                user.getUpdatedAt()
-            );
-            
+                    user.getId(),
+                    user.getUsername(),
+                    user.getName(),
+                    user.getDocument(),
+                    user.getEmail(),
+                    roleName,
+                    user.getImage(),
+                    user.getState(),
+                    user.getCreatedAt(),
+                    user.getUpdatedAt());
+
             // Crear la misma estructura que devuelve el login: { user, token }
             LoginResponse response = new LoginResponse(userResponse, token);
 
             return ResponseEntity.ok(
-                new ApiResponse("Success", HttpStatus.OK.value(), "Token válido", response)
-            );
+                    new ApiResponse("Success", HttpStatus.OK.value(), "Token válido", response));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token inválido o expirado", null)
-            );
+                    new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token inválido o expirado", null));
         }
+    }
+
+    @GetMapping("/check-username")
+    public ResponseEntity<ApiResponse> checkUsername(@RequestParam String username) {
+
+        boolean exists = userService.existsByUsername(username);
+
+        return ResponseEntity.ok(
+                new ApiResponse(
+                        "success",
+                        200,
+                        exists ? "Username no disponible" : "Username disponible",
+                        !exists));
     }
 }
 
-    // @GetMapping("/check-status")
-    // public ResponseEntity<ApiResponse> checkStatus(
-    //     @RequestHeader(value = "Authorization", required = false) String authorizationHeader
-    // ) {
+// @GetMapping("/check-status")
+// public ResponseEntity<ApiResponse> checkStatus(
+// @RequestHeader(value = "Authorization", required = false) String
+// authorizationHeader
+// ) {
 
-    //     if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-    //             new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token no proporcionado", null)
-    //         );
-    //     }
+// if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer
+// ")) {
+// return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+// new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token no
+// proporcionado", null)
+// );
+// }
 
-    //     String token = authorizationHeader.substring(7);
+// String token = authorizationHeader.substring(7);
 
-    //     try {
-    //         String username = jwtUtil.extractUsername(token);
-    //         String role = jwtUtil.extractRole(token);
+// try {
+// String username = jwtUtil.extractUsername(token);
+// String role = jwtUtil.extractRole(token);
 
-    //         Map<String, Object> data = new HashMap<>();
-    //         data.put("username", username);
-    //         data.put("role", role);
+// Map<String, Object> data = new HashMap<>();
+// data.put("username", username);
+// data.put("role", role);
 
-    //         return ResponseEntity.ok(
-    //             new ApiResponse("Success", HttpStatus.OK.value(), "Token válido", data)
-    //         );
+// return ResponseEntity.ok(
+// new ApiResponse("Success", HttpStatus.OK.value(), "Token válido", data)
+// );
 
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-    //             new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token inválido o expirado", null)
-    //         );
-    //     }
-    // }
-//}
+// } catch (Exception e) {
+// return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+// new ApiResponse("Error", HttpStatus.UNAUTHORIZED.value(), "Token inválido o
+// expirado", null)
+// );
+// }
+// }
+// }
