@@ -10,11 +10,13 @@ import { UserInterface } from '../users-page/user.interface';
 import { FormsModule } from '@angular/forms';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
+import { StatusClassesPipe } from '../../../app/status-classes-pipe';
+import { PriorityPipe } from '../../../app/priority-pipe';
 
 @Component({
   selector: 'project-detail-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule,StatusClassesPipe, PriorityPipe],
   templateUrl: './project-detail-page.html',
 })
 export class ProjectDetailPage implements OnInit {
@@ -92,7 +94,8 @@ export class ProjectDetailPage implements OnInit {
     const projectId = this.projectId();
     if (!projectId) return;
 
-    if (!this.newTaskName || !this.newTaskDescription || !this.newTaskDeadline || !this.newTaskPriority) {
+    // nombre y fecha límite son obligatorios; descripción y prioridad pueden venir por defecto
+    if (!this.newTaskName || !this.newTaskDeadline) {
       this.hasError.set(true);
       setTimeout(() => this.hasError.set(false), 2000);
       return;
@@ -119,7 +122,6 @@ export class ProjectDetailPage implements OnInit {
       name: this.newTaskName,
       description: this.newTaskDescription,
       deadline: deadlineIso,
-       // estado obligatorio: TO-DO (id = 1)
       stateProjectTaskId: 1,
       priorityId: priorityIdMap[this.newTaskPriority],
       projectId,

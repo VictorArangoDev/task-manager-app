@@ -1,4 +1,5 @@
 <main class="flex-1 flex flex-col overflow-y-auto">
+
   <!-- Header -->
   <header class="h-16 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 flex items-center justify-between px-8 bg-white dark:bg-stone-900">
     <div class="flex items-center gap-2">
@@ -7,86 +8,114 @@
           <path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
         </svg>
       </span>
-      <h2 class="font-semibold text-sm uppercase tracking-wider text-slate-500">Project Details</h2>
+      <h2 class="font-semibold text-sm uppercase tracking-wider text-slate-500">
+        Project Details
+      </h2>
     </div>
+
     <div class="flex items-center gap-4">
-      <a routerLink="/tasks/projects" class="text-sm text-primary hover:underline inline-flex items-center gap-1">
+      <a routerLink="/tasks/projects"
+        class="text-sm text-primary hover:underline inline-flex items-center gap-1">
         ← Volver a proyectos
       </a>
     </div>
   </header>
 
+
   <div class="p-8 mx-auto w-full max-w-6xl">
-    @if (project()) {
+
+    @if (project(); as projectData) {
+
       <!-- Header card -->
       <section class="bg-white dark:bg-stone-900 border border-slate-200 dark:border-stone-800 rounded-2xl p-6 shadow-sm mb-8">
+
         <div class="flex items-start justify-between gap-4">
+
           <div class="min-w-0">
+
             <div class="flex items-center gap-3">
+
               <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary grid place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
                 </svg>
               </div>
+
               <div class="min-w-0">
                 <h1 class="text-2xl font-bold text-slate-900 dark:text-white truncate">
-                  {{ project().name }}
+                  {{ projectData.name }}
                 </h1>
+
                 <p class="text-sm text-slate-500 dark:text-slate-400 truncate">
-                  {{ project().description }}
+                  {{ projectData.description }}
                 </p>
               </div>
+
             </div>
 
+
             <div class="mt-4 flex flex-wrap items-center gap-4 text-sm">
+
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-stone-800 border border-slate-200 dark:border-stone-700">
                 <span class="text-xs font-semibold text-slate-500">Inicio:</span>
-                <span class="font-semibold text-slate-800 dark:text-slate-200">{{ project().startDate | date: 'dd/MM/yyyy' }}</span>
+                <span class="font-semibold text-slate-800 dark:text-slate-200">
+                  {{ projectData.startDate | date: 'dd/MM/yyyy' }}
+                </span>
               </span>
+
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-stone-800 border border-slate-200 dark:border-stone-700">
                 <span class="text-xs font-semibold text-slate-500">Límite:</span>
-                <span class="font-semibold text-slate-800 dark:text-slate-200">{{ project().deadline | date: 'dd/MM/yyyy' }}</span>
+                <span class="font-semibold text-slate-800 dark:text-slate-200">
+                  {{ projectData.deadline | date: 'dd/MM/yyyy' }}
+                </span>
               </span>
+
             </div>
           </div>
 
+
           <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
-            [class]="project().stateProjectTask.name | statusClasses">
-            {{ project().stateProjectTask.name }}
+            [class]="projectData.stateProjectTask.name">
+
+            {{ projectData.stateProjectTask.name }}
+
           </span>
+
         </div>
+
       </section>
+
 
       <!-- Main content -->
       <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
         <!-- Tasks -->
         <div class="lg:col-span-2 bg-white dark:bg-stone-900 border border-slate-200 dark:border-stone-800 rounded-2xl shadow-sm">
+
           <div class="p-6 flex items-center justify-between gap-4 border-b border-slate-200 dark:border-stone-800">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary grid place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="M7 5h14v2H7zm0 6h14v2H7zm0 6h14v2H7zM3 5h2v2H3zm0 6h2v2H3zm0 6h2v2H3z" />
-                </svg>
-              </div>
-              <h2 class="text-lg font-bold text-slate-900 dark:text-white">
-                Tareas del Proyecto
-                <span class="ml-2 text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-                  {{ tasks().length }}
-                </span>
-              </h2>
-            </div>
+
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white">
+              Tareas del Proyecto
+              <span class="ml-2 text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                {{ tasks().length }}
+              </span>
+            </h2>
 
             <button
               type="button"
               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors"
-              (click)="showCreateTask.set(!showCreateTask())"
-            >
+              (click)="showCreateTask.set(!showCreateTask())">
+
               <span class="text-lg leading-none">＋</span>
               Nueva Tarea
+
             </button>
+
           </div>
 
+
           <div class="p-6 space-y-4">
+
             <!-- Create task form -->
             @if (showCreateTask()) {
               <div class="border border-slate-200 dark:border-stone-800 rounded-2xl p-4 bg-slate-50/60 dark:bg-stone-800/40">
@@ -133,170 +162,150 @@
                       />
                     </div>
                   </div>
-                  <div class="md:col-span-3 flex justify-end gap-2 pt-2">
-                    <button
-                      type="button"
-                      class="px-4 py-2 rounded-xl border border-slate-200 dark:border-stone-700 text-sm font-semibold hover:bg-white/70 dark:hover:bg-stone-900/30 transition-colors"
-                      (click)="showCreateTask.set(false)"
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      type="submit"
-                      class="px-4 py-2 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors"
-                    >
-                      Crear
-                    </button>
+                  <div class="md:col-span-3 flex justify-between items-center gap-2 pt-2">
+                    @if (hasError()) {
+                      <p class="text-xs font-semibold text-red-500">
+                        Nombre y fecha límite son obligatorios.
+                      </p>
+                    }
+                    <div class="ml-auto flex gap-2">
+                      <button
+                        type="button"
+                        class="px-4 py-2 rounded-xl border border-slate-200 dark:border-stone-700 text-sm font-semibold hover:bg-white/70 dark:hover:bg-stone-900/30 transition-colors"
+                        (click)="showCreateTask.set(false)"
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        type="submit"
+                        class="px-4 py-2 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors"
+                      >
+                        Crear
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>
             }
 
-            <!-- Task list -->
             @if (tasks().length) {
+
               <div class="space-y-3">
+
                 @for (task of tasks(); track task.id) {
+
                   <div class="border border-slate-200 dark:border-stone-800 rounded-2xl p-4 hover:border-primary/30 transition-colors">
+
                     <div class="flex items-start justify-between gap-4">
+
                       <div class="min-w-0 flex-1">
+
                         <p class="font-bold text-slate-900 dark:text-white truncate">
                           {{ task.name }}
                         </p>
+
                         <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">
                           {{ task.description }}
                         </p>
+
                       </div>
 
+
                       <div class="flex items-center gap-2">
-                        <span class="px-3 py-1 rounded-xl text-xs font-bold bg-slate-100 dark:bg-stone-800 border border-slate-200 dark:border-stone-700">
-                          {{ task.stateProjectTask.name }}
+
+                        <span class="px-3 py-1 rounded-xl text-xs font-bold bg-slate-100 dark:bg-stone-800 border border-slate-200 dark:border-stone-700"
+                         [class]="task.stateProjectTask.name | statusClasses">
+                          {{ task.stateProjectTask.name  }}
                         </span>
+
                         <span class="px-2 py-0.5 rounded-lg text-xs font-semibold"
-                          [class]="task.priority.name">
+                          [class]="task.priority.name | priority">
                           {{ task.priority.name }}
                         </span>
+
                         <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
                           {{ task.deadline | date: 'dd/MM/yyyy' }}
                         </span>
+
                       </div>
+
                     </div>
+
                   </div>
+
                 }
+
               </div>
+
             } @else {
+
               <div class="border border-dashed border-slate-200 dark:border-stone-800 rounded-2xl p-6 text-center">
                 <p class="text-sm text-slate-500 dark:text-slate-400">
                   No hay tareas registradas para este proyecto.
                 </p>
               </div>
+
             }
+
           </div>
+
         </div>
+
 
         <!-- Members -->
         <div class="bg-white dark:bg-stone-900 border border-slate-200 dark:border-stone-800 rounded-2xl shadow-sm">
-          <div class="p-6 flex items-center justify-between gap-4 border-b border-slate-200 dark:border-stone-800">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary grid place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-              </div>
-              <h2 class="text-lg font-bold text-slate-900 dark:text-white">
-                Miembros
-                <span class="ml-2 text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-                  {{ project().users.length }}
-                </span>
-              </h2>
-            </div>
 
-            <button
-              type="button"
-              class="w-10 h-10 rounded-xl border border-slate-200 dark:border-stone-700 hover:bg-slate-50 dark:hover:bg-stone-800 transition-colors grid place-items-center text-primary"
-              (click)="assignUsers()"
-              [class.opacity-60]="!selectedUserIds().length"
-              [disabled]="!selectedUserIds().length"
-              title="Guardar asignación"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-              </svg>
-            </button>
+          <div class="p-6 flex items-center justify-between border-b border-slate-200 dark:border-stone-800">
+
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white">
+
+              Miembros
+
+              <span class="ml-2 text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                {{ projectData.users.length }}
+              </span>
+
+            </h2>
+
           </div>
 
-            <div class="p-6 space-y-4">
-            <!-- Selected members list (usuarios asignados al proyecto) -->
-            @if (project().users.length) {
-              <div class="space-y-2">
-                @for (user of project().users; track user.id) {
-                  <div class="flex items-center justify-between gap-3 border border-slate-200 dark:border-stone-800 rounded-2xl px-3 py-2">
-                    <div class="flex items-center gap-3 min-w-0">
-                      <div class="w-10 h-10 rounded-full bg-primary/10 text-primary grid place-items-center font-bold text-sm">
-                        {{ user.name.charAt(0) || 'U' }}
-                      </div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
-                          {{ user.name }}
-                        </p>
-                      </div>
-                    </div>
 
-                    <button
-                      type="button"
-                      class="w-9 h-9 rounded-xl hover:bg-slate-50 dark:hover:bg-stone-800 transition-colors grid place-items-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
-                      (click)="toggleUser(user.id)"
-                      title="Quitar"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                }
+          <div class="p-6 space-y-2">
+
+            @for (user of projectData.users; track user.id) {
+
+              <div class="flex items-center gap-3 border border-slate-200 dark:border-stone-800 rounded-2xl px-3 py-2">
+
+                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary grid place-items-center font-bold text-sm">
+                  {{ user.name.charAt(0) || 'U' }}
+                </div>
+
+                <div class="min-w-0">
+                  <p class="text-sm font-bold text-slate-900 dark:text-white truncate">
+                    {{ user.name }}
+                  </p>
+                </div>
+
               </div>
-            } @else {
-              <div class="border border-dashed border-slate-200 dark:border-stone-800 rounded-2xl p-6 text-center">
-                <p class="text-sm text-slate-500 dark:text-slate-400">
-                  Aún no hay miembros asignados a este proyecto.
-                </p>
-              </div>
+
             }
 
-            <!-- Picker -->
-            <div class="border border-slate-200 dark:border-stone-800 rounded-2xl p-4 bg-slate-50/60 dark:bg-stone-800/40">
-              <p class="text-xs font-semibold text-slate-500 mb-3">
-                Agregar / quitar miembros
-              </p>
-              <div class="max-h-72 overflow-y-auto space-y-2">
-                @for (user of users(); track user.id) {
-                  <label class="flex items-center justify-between gap-3 px-2 py-1.5 rounded-xl hover:bg-white/70 dark:hover:bg-stone-900/30 cursor-pointer">
-                    <div class="flex items-center gap-2 min-w-0">
-                      <input
-                        type="checkbox"
-                        class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
-                        [checked]="selectedUserIds().includes(user.id)"
-                        (change)="toggleUser(user.id)"
-                      />
-                      <div class="min-w-0">
-                        <p class="text-sm font-semibold text-slate-900 dark:text-white truncate">
-                          {{ user.name }}
-                        </p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate">
-                          {{ user.email }}
-                        </p>
-                      </div>
-                    </div>
-                  </label>
-                }
-              </div>
-            </div>
           </div>
+
         </div>
+
       </section>
+
     } @else {
+
       <div class="flex items-center justify-center py-12">
         <p class="text-sm text-slate-500 dark:text-slate-400">
           Cargando proyecto...
         </p>
       </div>
+
     }
+
   </div>
+
 </main>

@@ -22,26 +22,24 @@
   <div class="grid grid-cols-3 gap-4 mb-6">
     <div>
       <p class="text-[10px] uppercase font-bold text-slate-400 mb-0.5">Start Date</p>
-      <p class="text-xs font-semibold text-slate-700 dark:text-slate-300">{{project().createdAt | date:'dd/MM/yyyy'  }}</p>
+      <p class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+        {{ project().createdAt | date:'dd/MM/yyyy' }}
+      </p>
     </div>
     <div>
       <p class="text-[10px] uppercase font-bold text-slate-400 mb-0.5">Deadline</p>
-      <p class="text-xs font-semibold text-slate-700 dark:text-slate-300">{{project().deadline | date:'dd/MM/yyyy' }}</p>
+      <p class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+        {{ project().deadline | date:'dd/MM/yyyy' }}
+      </p>
     </div>
     <div>
       <div class="flex -space-x-2">
-        <img alt="Member" class="w-8 h-8 rounded-full border-2 border-white dark:border-stone-900"
-          data-alt="Female team member avatar profile"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6ikY70Wcot9v0Cha3pUM33wnOclMvNWuR9Scq0SLOAaAMStbPkZ4_1xQS_D5DdaQ0Cg761fkINKzoeaG0udMITpAXquxpzqpg8vBaKHBjl89c0oQnAaIQyUu_xbo464EXjutXw7wudgXLgauB6uU8-zI-hJpDKfzI7y2ckAFRZpxkMwiFRtqHmQnBWuOsdhYJPRR_bzfB-fIjdtVh5X5s38jvdanH_W2uX0tSYpV5XER8SAECIxJ266h-VMdX6_chyHVqMUODWcs" />
-        <img alt="Member" class="w-8 h-8 rounded-full border-2 border-white dark:border-stone-900"
-          data-alt="Male team member avatar profile"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmHdALsIkg0PRwO7490x8hCbrlIdmmnlfbkbnq4FDilKUVIJoUBKS2dxJid0L82E_dlE34hVxFbXnqU0OLqBzRHlZ8Zq7tHVxqFHdVavhEUs6YBPEdG3soUWrG8Vjk-gnpAE2GT_06aY9HbMpyH6QootR75ldq1NnpgToIuJQZKvDv5En4itGble80PsaqnVEmkbhky3rtK36Vggmxe5gfY_6H5-LZPSfQanrdo07V9oYEoseUKTfbZi8lCooL-NiVhbqgxHulNs0" />
-        <img alt="Member" class="w-8 h-8 rounded-full border-2 border-white dark:border-stone-900"
-          data-alt="Non-binary team member avatar profile"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiZucES7O3jQtFoeBmkClkJSbcjY_bEnj-EbRTZg8ZFpyG3KKKSsUPCfBHfGZoASHDrEtQ9ygjBaFwacPHh2zadQYekR_Yhp5_1t_ijSKzwcUNIsMXGiqC6n0XPvAScP3kX9liPEWMZyuxuDkbrnKMXIU1t3WbgWF7FeBl4IwgI4F3AfrjsYUvOdFMxtLYHmfjDpK0D-3CiVwlV6a02H2HxqtzmhUHqi1McJs1vSUKwtOv2vKgtJzoJU-NyFycaiwf-rtQ3yw0tGs" />
-        <div
-          class="w-8 h-8 rounded-full bg-slate-100 dark:bg-stone-800 border-2 border-white dark:border-stone-900 flex items-center justify-center text-[10px] font-bold">
-          +4</div>
+        @for (user of project().users; track user.id) {
+          <div
+            class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-[10px] border-2 border-white dark:border-stone-900">
+            {{ user.name | iniciales }}
+          </div>
+        }
       </div>
     </div>
   </div>
