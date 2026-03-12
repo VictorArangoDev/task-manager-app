@@ -1,1 +1,224 @@
-<p>temas-page works!</p>,
+<main class="flex-1 ml-64 p-8">
+  <!-- Header Section -->
+  <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+    <div class="max-w-2xl">
+      <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Team Management</h2>
+      <p class="text-slate-500 dark:text-slate-400">Manage your organization's members, roles, and departmental
+        structure in one place.</p>
+    </div>
+    <div class="flex gap-3">
+      <button
+        class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">
+        <span class="material-symbols-outlined text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11.625 15.513q-.175-.063-.325-.213l-3.6-3.6q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L11 12.15V5q0-.425.288-.712T12 4t.713.288T13 5v7.15l1.875-1.875q.3-.3.713-.288t.712.313q.275.3.288.7t-.288.7l-3.6 3.6q-.15.15-.325.213t-.375.062t-.375-.062M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15t.713.288T6 16v2h12v-2q0-.425.288-.712T19 15t.713.288T20 16v2q0 .825-.587 1.413T18 20z"/></svg></span>
+        Export List
+      </button>
+      <button
+        class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-shadow shadow-lg shadow-primary/20">
+        + Add Department
+      </button>
+    </div>
+  </div>
+  <!-- Stats Overview -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-primary/10 shadow-sm">
+      <div class="flex justify-between items-start mb-2">
+        <p class="text-slate-500 text-sm font-medium uppercase tracking-wider">Total Members</p>
+        <span class="material-symbols-outlined text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M1 18q-.425 0-.712-.288T0 17v-.575q0-1.075 1.1-1.75T4 14q.325 0 .625.013t.575.062q-.35.525-.525 1.1t-.175 1.2V18zm6 0q-.425 0-.712-.288T6 17v-.625q0-.8.438-1.463t1.237-1.162T9.588 13T12 12.75q1.325 0 2.438.25t1.912.75t1.225 1.163t.425 1.462V17q0 .425-.287.713T17 18zm12.5 0v-1.625q0-.65-.162-1.225t-.488-1.075q.275-.05.563-.062T20 14q1.8 0 2.9.663t1.1 1.762V17q0 .425-.288.713T23 18zM8.125 16H15.9q-.25-.5-1.388-.875T12 14.75t-2.512.375T8.125 16M4 13q-.825 0-1.412-.587T2 11q0-.85.588-1.425T4 9q.85 0 1.425.575T6 11q0 .825-.575 1.413T4 13m16 0q-.825 0-1.412-.587T18 11q0-.85.588-1.425T20 9q.85 0 1.425.575T22 11q0 .825-.575 1.413T20 13m-8-1q-1.25 0-2.125-.875T9 9q0-1.275.875-2.137T12 6q1.275 0 2.138.863T15 9q0 1.25-.862 2.125T12 12m0-2q.425 0 .713-.288T13 9t-.288-.712T12 8t-.712.288T11 9t.288.713T12 10m0-1"/></svg>
+        </span>
+      </div>
+      <p class="text-3xl font-bold text-slate-900 dark:text-white">24</p>
+      <p class="text-xs text-green-600 font-medium mt-2 flex items-center gap-1">
+        <span class="material-symbols-outlined text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2.7 17.625q-.3-.3-.288-.712t.288-.688l5.275-5.35Q8.55 10.3 9.4 10.3t1.425.575l2.575 2.6l5.2-5.15H17q-.425 0-.712-.288T16 7.326t.288-.712t.712-.288h4q.425 0 .713.288t.287.712v4q0 .425-.288.713t-.712.287t-.712-.287t-.288-.713v-1.6L14.825 14.9q-.575.575-1.425.575t-1.425-.575L9.4 12.325l-5.3 5.3q-.275.275-.7.275t-.7-.275"/></svg>
+        </span> +2 this month
+      </p>
+    </div>
+    <div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-primary/10 shadow-sm">
+      <div class="flex justify-between items-start mb-2">
+        <p class="text-slate-500 text-sm font-medium uppercase tracking-wider">Pending Invites</p>
+        <span class="material-symbols-outlined text-orange-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm8-7L4 8v10h16V8zm0-2l8-5H4zM4 8V6v12z"/></svg>
+        </span>
+      </div>
+      <p class="text-3xl font-bold text-slate-900 dark:text-white">5</p>
+      <p class="text-xs text-slate-400 font-medium mt-2">Awaiting confirmation</p>
+    </div>
+    <div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-primary/10 shadow-sm">
+      <div class="flex justify-between items-start mb-2">
+        <p class="text-slate-500 text-sm font-medium uppercase tracking-wider">Departments</p>
+        <span class="material-symbols-outlined text-purple-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3c2.21 0 4 1.79 4 4s-1.79 4-4 4s-4-1.79-4-4s1.79-4 4-4m4 10.54c0 1.06-.28 3.53-2.19 6.29L13 15l.94-1.88c-.62-.07-1.27-.12-1.94-.12s-1.32.05-1.94.12L11 15l-.81 4.83C8.28 17.07 8 14.6 8 13.54c-2.39.7-4 1.96-4 3.46v4h16v-4c0-1.5-1.6-2.76-4-3.46"/></svg>
+        </span>
+      </div>
+      <p class="text-3xl font-bold text-slate-900 dark:text-white">4</p>
+      <p class="text-xs text-slate-400 font-medium mt-2">Active business units</p>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Left: Member Table -->
+    <div class="lg:col-span-2 space-y-6">
+      <div class="bg-white dark:bg-background-dark rounded-xl border border-primary/10 overflow-hidden shadow-sm">
+        <div class="p-5 border-b border-primary/10 flex justify-between items-center">
+          <h3 class="font-bold text-slate-900 dark:text-white">Team Members</h3>
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg></span>
+            <input
+              class="pl-10 pr-4 py-1.5 border border-slate-200 dark:border-slate-700 dark:bg-slate-800 rounded-lg text-sm focus:ring-primary focus:border-primary"
+              placeholder="Search members..." type="text" />
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead class="bg-slate-50 dark:bg-slate-900/50">
+              <tr>
+                <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Role</th>
+                <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
+                <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-primary/5">
+              <!-- Row 1 -->
+              <tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="size-9 rounded-full bg-slate-100" data-alt="Avatar of Sarah Jenkins"
+                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDRmSSbJKUtne7ZvFwmi0KL8E482Ji0wSPVOljrHUnDab-AHHEAcDRj8gdmJTi4UdzBI2hJGOdW-WGlkhwUOHdqoQQs6p89jhBPk9xj6tRp1b-X9JrYxh3Si8ewt2itU3KObzcsbrAU4VrVB02KyMPECmylldCwCFif79yye7yn044nlRkmC-FVgnn7E47vRbgD0jGWFtZb83TjfJBZRBcndxEHnZP6QSyrxe3YR9n7huQrtqFUEZx4Y7-V0zvFg4KPryHYS9EeVSc'); background-size: cover;">
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold text-slate-900 dark:text-white">Sarah Jenkins</p>
+                      <p class="text-xs text-slate-500">sarah.j@projectaurora.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-primary/10 text-primary border border-primary/20">Admin</span>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-2">
+                    <div class="size-2 rounded-full bg-green-500"></div>
+                    <span class="text-xs font-medium text-slate-700 dark:text-slate-300">Active</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button class="text-slate-400 hover:text-slate-600"><span
+                      class="material-symbols-outlined text-xl"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14 18a2 2 0 1 1-4 0a2 2 0 0 1 4 0m0-6a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2-4a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/></svg></span></button>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="size-9 rounded-full bg-slate-100" data-alt="Avatar of Marcus Wu"
+                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC22MxQWDB-xYYc3cfb8Qc1SGVjMp6qBzJTp8DfpYTZbtovGjh8o36AsJI-P-bDpjmixggYU6QxnSCdkfERYqO2CI5zt1HFdBpR6YsH3tZ0vwnJhrT-tg4OqSaAdtu3rYa7Sn7CuI3C8nw16JUzjWctbx3phYh86Tnae9EWOHfRjaWaXu_V_fP5-ATsLRfFbk2d9uCIkzEEqmsUV0SVPpDs2HTNqW9gxMz6FHBGJpApvpZD77HXn2pLrtqQeE04fPC2TkYFQPnSPHo'); background-size: cover;">
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold text-slate-900 dark:text-white">Marcus Wu</p>
+                      <p class="text-xs text-slate-500">m.wu@projectaurora.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700">Member</span>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-2">
+                    <div class="size-2 rounded-full bg-green-500"></div>
+                    <span class="text-xs font-medium text-slate-700 dark:text-slate-300">Active</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button class="text-slate-400 hover:text-slate-600"><span
+                      class="material-symbols-outlined text-xl"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14 18a2 2 0 1 1-4 0a2 2 0 0 1 4 0m0-6a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2-4a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/></svg></span></button>
+                </td>
+              </tr>
+              <!-- Row 3 -->
+              <tr class="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="size-9 rounded-full bg-slate-100" data-alt="Avatar of Elena Rodriguez"
+                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBnhyasLFu-tEVsUz12XRwiqZaqse2IMBVsdpv9bkTIVeGxJtS6muvy3ro75XdPFcbv1-f8_1IVuK8-C1OmMr5x7q-oZbez0p11TTRR0ulZQ305apP7uycmXvuWpnHDEXS6-g4y9JB1-r2sfCMWmkZAOSpTx_kqfYQDfojuou7NOKkw1WeVIkrrePSPaewIdnit00ecRj1PxDnGn93vQa9Wzd4LdH4lMcEvOGeFXq4i-YhEXGG5PjD3Eb7jqIuwcOltYxJFLcsO9V8'); background-size: cover;">
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold text-slate-900 dark:text-white">Elena Rodriguez</p>
+                      <p class="text-xs text-slate-500">elena.r@external.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-amber-50 text-amber-700 border border-amber-200">Viewer</span>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-2">
+                    <div class="size-2 rounded-full bg-orange-400"></div>
+                    <span class="text-xs font-medium text-slate-700 dark:text-slate-300">Pending</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button class="text-slate-400 hover:text-slate-600"><span
+                      class="material-symbols-outlined text-xl"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14 18a2 2 0 1 1-4 0a2 2 0 0 1 4 0m0-6a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2-4a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/></svg></span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-4 border-t border-primary/5 bg-slate-50/30 dark:bg-slate-900/30 text-center">
+          <button class="text-primary text-sm font-bold hover:underline">View All 24 Members</button>
+        </div>
+      </div>
+      <!-- Department Section -->
+
+    </div>
+    <!-- Right Side: Invite Section -->
+    <div class="space-y-6">
+      <div class="bg-primary text-white p-6 rounded-xl shadow-xl shadow-primary/20 sticky top-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-3xl">person_add</span>
+          <h3 class="text-xl font-bold">Invite Member</h3>
+        </div>
+        <p class="text-sm text-primary-200 opacity-90 mb-6">Bring your teammates to collaborate on Project Aurora tasks.
+        </p>
+        <form class="space-y-4" onsubmit="return false;">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-widest mb-1.5 opacity-80">Email Address</label>
+            <input
+              class="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm placeholder:text-white/40 focus:ring-2 focus:ring-white/50 focus:outline-none transition-all"
+              placeholder="teammate@company.com" type="email" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-widest mb-1.5 opacity-80">Assign Role</label>
+            <select
+              class="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm focus:ring-2 focus:ring-white/50 focus:outline-none appearance-none transition-all cursor-pointer">
+              <option class="text-slate-900">Member</option>
+              <option class="text-slate-900">Viewer</option>
+              <option class="text-slate-900">Admin</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-widest mb-1.5 opacity-80">Department
+              (Optional)</label>
+            <select
+              class="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm focus:ring-2 focus:ring-white/50 focus:outline-none appearance-none transition-all cursor-pointer">
+              <option class="text-slate-900">None</option>
+              <option class="text-slate-900">Engineering</option>
+              <option class="text-slate-900">Marketing</option>
+              <option class="text-slate-900">Product Design</option>
+            </select>
+          </div>
+          <button
+            class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm mt-4 hover:bg-slate-100 transition-colors shadow-lg">
+            Send Invitation
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</main>

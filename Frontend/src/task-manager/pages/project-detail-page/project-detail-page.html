@@ -2,16 +2,7 @@
 
   <!-- Header -->
   <header class="h-16 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 flex items-center justify-between px-8 bg-white dark:bg-stone-900">
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-slate-400">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-        </svg>
-      </span>
-      <h2 class="font-semibold text-sm uppercase tracking-wider text-slate-500">
-        Project Details
-      </h2>
-    </div>
+
 
     <div class="flex items-center gap-4">
       <a routerLink="/tasks/projects"
@@ -22,7 +13,7 @@
   </header>
 
 
-  <div class="p-8 mx-auto w-full max-w-6xl">
+  <div class="p-8 mx-auto w-full max-w-8xl">
 
     @if (project(); as projectData) {
 
@@ -75,7 +66,7 @@
 
 
           <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
-            [class]="projectData.stateProjectTask.name">
+            [class]="projectData.stateProjectTask.name | statusClasses">
 
             {{ projectData.stateProjectTask.name }}
 
@@ -277,7 +268,7 @@
               <div class="flex items-center gap-3 border border-slate-200 dark:border-stone-800 rounded-2xl px-3 py-2">
 
                 <div class="w-10 h-10 rounded-full bg-primary/10 text-primary grid place-items-center font-bold text-sm">
-                  {{ user.name.charAt(0) || 'U' }}
+                  {{ user.name | iniciales }}
                 </div>
 
                 <div class="min-w-0">

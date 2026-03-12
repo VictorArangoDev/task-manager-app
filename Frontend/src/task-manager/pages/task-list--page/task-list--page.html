@@ -12,10 +12,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg>
                         Export
                     </button>
-<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z"/></svg>
-                        Add New Task
-                    </button>
+
 </div>
 </div>
 <!-- Filter Toolbar -->
@@ -57,15 +54,16 @@
 <!-- Task Table Area -->
 <div class="flex-1 overflow-auto px-8 pb-8">
 <div class="dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-<table class="w-full text-left border-collapse min-w-[800px]">
+<table class="w-full text-left border-collapse min-w-200">
 <thead>
 <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+
+
 <th class="py-4 px-6 w-12">
 <input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
 </th>
 <th class="py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Task Name</th>
 <th class="py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Priority</th>
-<th class="py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Assignee</th>
 <th class="py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Due Date</th>
 <th class="py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
 <th class="py-4 px-6 text-right"></th>
@@ -73,37 +71,37 @@
 </thead>
 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
 <!-- Task Row 1 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+
+  @for (task of tasksResource.value(); track task.id) {
+
+
+  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
 <td class="py-4 px-6">
 <input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
 </td>
 <td class="py-4 px-4">
 <div class="flex flex-col">
-<span class="text-sm font-semibold text-slate-900 dark:text-white">Finalize API Documentation</span>
-<span class="text-xs text-slate-500 dark:text-slate-400">Core Infrastructure</span>
+<span class="text-sm font-semibold text-slate-900 dark:text-white">{{task.name}}</span>
 </div>
 </td>
 <td class="py-4 px-4">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 uppercase tracking-tight">
-<span class="size-1.5 rounded-full bg-red-500 mr-1.5"></span>
-                                    High
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold tracking-tight"
+ [class]="task.priority.name | priority"
+>
+
+                                    {{task.priority.name}}
                                 </span>
 </td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2">
-<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Team member avatar - Sarah Chen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5qUzZm6LUm_UhtaSBm5UYPK2OW_c63T2VEEWA-ZL9KvvbfG3Ecxaf0inIgu-yoNsJnQiWvLto9LNLlMNAxDhjTc2GWlv7v9ZXA18S2ZZwTqfNuBHsoJx7kSN4yXPC4GZHEzd315_tqWv87_7k6UCNq95f_TRU7EKeQqPMyE4JBuVKU6YrHLHzvjocWr1s5gQHt0GWTD1m-YIZuV6WJFj7H4bWe_JA_zkTXWX7B2-tsOWE7K0eaUM2F6DrvoHodOHbvQOQwIu4H2Y')"></div>
-<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Sarah Chen</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
-<span class="material-symbols-outlined text-[18px]">event</span>
-                                    Oct 24, 2023
+
+<div class="flex items-center  gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
+
+                                    {{task.deadline }}
                                 </div>
-</td>
+
 <td class="py-4 px-4">
-<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-300">
-                                    In Progress
+<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-primary/10"
+  [class]="task.stateProjectTask.name | statusClasses">
+                                   {{task.stateProjectTask.name}}
                                 </span>
 </td>
 <td class="py-4 px-6 text-right">
@@ -112,167 +110,13 @@
 </button>
 </td>
 </tr>
-<!-- Task Row 2 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
-<td class="py-4 px-6">
-<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="py-4 px-4">
-<div class="flex flex-col">
-<span class="text-sm font-semibold text-slate-900 dark:text-white">UI Polish for Login Screen</span>
-<span class="text-xs text-slate-500 dark:text-slate-400">Design System</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 uppercase tracking-tight">
-<span class="size-1.5 rounded-full bg-amber-500 mr-1.5"></span>
-                                    Medium
-                                </span>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2">
-<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Team member avatar - Marcus J." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOLHK9vmlqOEWp3nvQU6oO7EenOUKoQcumr1IliEVv1C0csn4TidTUhOHOXaMV6PIAprFGJOYzYE-t3pAd_3JjDNV0oIBfrHrzCykdAnk0LZWGAvCGhdWbIdFuQX3pUf_ejz0ePW7f3oxG81ENk_m7UtR38RNlqLb5VPPFJkRA1mhpTjsM0TsUVhTvTkACm1Rn-TXJ79LWXPXLRITlzuI7XU8vAkuSpqxckvyUav6Mqxqi_Anh9bsxhznHwtkZvhUw66trFumgW0g')"></div>
-<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Marcus J.</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
-<span class="material-symbols-outlined text-[18px]">event</span>
-                                    Oct 26, 2023
-                                </div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                                    To Do
-                                </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2"/></svg>
-</button>
-</td>
-</tr>
-<!-- Task Row 3 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
-<td class="py-4 px-6">
-<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="py-4 px-4">
-<div class="flex flex-col">
-<span class="text-sm font-semibold text-slate-400 dark:text-slate-500 line-through">Database Migration</span>
-<span class="text-xs text-slate-400 dark:text-slate-600">Backend</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 uppercase tracking-tight">
-<span class="size-1.5 rounded-full bg-red-500 mr-1.5"></span>
-                                    High
-                                </span>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2">
-<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Team member avatar - David Ryu" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBE6izX__tLH5yEvm6M37l0lYqlGHRa2ibjnGBcvJatcBhAQDqFI7AFJh-xYMFsxnm9lOerhmeW62R8fJEdf8ekv1r90YbKbPV2Y6vByvoTfGGDfVvx13XidX_0RBhrHfOhgVmBfoUJHdjQ4M4VBQJWtrDUiavHqmvSyL0RYSiqMmx-BTaij6smyVS5bo06c5mftP66PnTBKsW8b06ke1KBG_bYL316R5YnVfOgRJnHn1YzkbDuh1OxsgtYlPZcRMZ7H27N0zwAKMw')"></div>
-<span class="text-sm font-medium text-slate-700 dark:text-slate-300">David Ryu</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2 text-sm font-medium text-slate-400 dark:text-slate-500">
-<span class="material-symbols-outlined text-[18px]">event</span>
-                                    Oct 22, 2023
-                                </div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
-<span class="material-symbols-outlined text-[14px] mr-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-1.2a8.8 8.8 0 1 0 0-17.6a8.8 8.8 0 0 0 0 17.6m-1.172-6.242l5.809-5.808l.848.849l-5.95 5.95a1 1 0 0 1-1.414 0L7 12.426l.849-.849l2.98 2.98z"/></svg></span>
-                                    Done
-                                </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2"/></svg>
-</button>
-</td>
-</tr>
-<!-- Task Row 4 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
-<td class="py-4 px-6">
-<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="py-4 px-4">
-<div class="flex flex-col">
-<span class="text-sm font-semibold text-slate-900 dark:text-white">Client Feedback Loop - Sprint 2</span>
-<span class="text-xs text-slate-500 dark:text-slate-400">Project Management</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 uppercase tracking-tight">
-<span class="size-1.5 rounded-full bg-slate-400 mr-1.5"></span>
-                                    Low
-                                </span>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2">
-<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Team member avatar - Alex Rivera" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAm9Bleuth1_gwLU2lCaYkjO_INUx7FrXoRwdplAEfzFWQXanjBPC_7YlWnZmzB7CPyJaWy0yhDcKWLj646hUzZRPNPaJPl3vxOD_QiBvNdNfo9fEMosWxNEYhJkrqiUn-lHpQ2HBmtVQxImMZtiCZKvlOQSyfJPAFmRbCDjq7dcaqfAmwfmvn8N5wH0iKAtgJOfohQ7e3SrJ_nny97x6lN9hDSIsRNy2vZiobYooW7VmNu7o2CbzG-BQ1-HjWAM6PkqCRgqtmJwWA')"></div>
-<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Alex Rivera</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
-<span class="material-symbols-outlined text-[18px]">event</span>
-                                    Oct 30, 2023
-                                </div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-300">
-                                    In Progress
-                                </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2"/></svg>
-</button>
-</td>
-</tr>
-<!-- Task Row 5 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
-<td class="py-4 px-6">
-<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="py-4 px-4">
-<div class="flex flex-col">
-<span class="text-sm font-semibold text-slate-900 dark:text-white">Security Compliance Audit</span>
-<span class="text-xs text-slate-500 dark:text-slate-400">Legal/DevOps</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 uppercase tracking-tight">
-<span class="size-1.5 rounded-full bg-red-500 mr-1.5"></span>
-                                    High
-                                </span>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2">
-<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Team member avatar - Elena G." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD9ruuj0rXTAbicVjsMTCPdLsdnffIwQTKpQ6Y3YfCVhRafOYUJswD7chz167qSVwJO6ARhj20eXHJgHrFZQfFsHWldgWTcSU8wmdRZPiz6s0lT13K9TQ07w1yqGZfhkP8BeVJ-M96QQrJspcle6u57pNFLTRe6Cj_wQENg-hzm5tQsm_pnI_OCfyxgQMhj32pckX1aP7zR476pLdat84Tngvzrmf7YyGIKW4a2WCtqrPw3Tsv_4Zw3nXQiu0pI4WfNItYYyQEDOkA')"></div>
-<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Elena G.</span>
-</div>
-</td>
-<td class="py-4 px-4">
-<div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
-<span class="material-symbols-outlined text-[18px]">event</span>
-                                    Nov 02, 2023
-                                </div>
-</td>
-<td class="py-4 px-4">
-<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                                    To Do
-                                </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2"/></svg>
-</button>
-</td>
-</tr>
+}
+
+
+
+
+
+
 </tbody>
 </table>
 </div>

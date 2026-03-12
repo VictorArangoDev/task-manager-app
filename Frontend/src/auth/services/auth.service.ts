@@ -100,7 +100,6 @@ export class AuthService {
     this._token.set(null);
     this._authStatus.set('not-authenticated');
     localStorage.removeItem('token');
-    // this.router.navigateByUrl("auth/login");
   }
 
   private handleAuthSuccess({ data }: AuthResponse) {

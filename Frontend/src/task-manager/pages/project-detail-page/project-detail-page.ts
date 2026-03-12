@@ -12,11 +12,12 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
 import { StatusClassesPipe } from '../../../app/status-classes-pipe';
 import { PriorityPipe } from '../../../app/priority-pipe';
+import { InicialesPipe } from '../../../app/iniciales-pipe';
 
 @Component({
   selector: 'project-detail-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule,StatusClassesPipe, PriorityPipe],
+  imports: [CommonModule, RouterLink, FormsModule,StatusClassesPipe, PriorityPipe, InicialesPipe],
   templateUrl: './project-detail-page.html',
 })
 export class ProjectDetailPage implements OnInit {
